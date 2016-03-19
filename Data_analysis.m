@@ -9,7 +9,7 @@ N_RxSines = length(Rx_sines);
 N_RxCos = length(Rx_cosines);
 
 
-return;
+
 
 return
 Tx_SinesConcat = reshape(sines, 1,numel(sines));

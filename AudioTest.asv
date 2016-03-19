@@ -1,6 +1,0 @@
-clear
-close all
-%% Parameters
-Fs = 44.1e3;
-d = 
-
