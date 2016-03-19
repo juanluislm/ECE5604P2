@@ -4,7 +4,7 @@ close all
 Fs = 44100;
 r = audiorecorder(Fs, 16, 1);
 record(r);     % speak into microphone...
-buff = ones(1,50000);
+buff = ones(1,5000);
 pause(0.1)
 while(1)
     y = getaudiodata(r);
