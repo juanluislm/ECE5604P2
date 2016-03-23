@@ -1,9 +1,0 @@
-clear 
-close all
-%%
-Fs = 22e3;
-r = audiorecorder(Fs, 8, 1);
-record(r);     % speak into microphone...
-
-% stop(r);
-%y = getaudiodata(r); 
