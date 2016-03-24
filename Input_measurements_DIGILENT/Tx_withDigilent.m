@@ -52,21 +52,21 @@ sines_Z = [zeros(1,5*Fs) , sines];
 cosines_Z = [zeros(1,5*Fs) , cosines];
 
 %% Send
-sound(cosines_Z,Fs);
+sound(sines_Z,Fs);
 [DigilentData, timestamps, triggerTime] = startForeground(s);
 %pause(d*2)
-% Tx_sines_after_soundCard_headSet = DigilentData;
-% Tx_sines_before_soundCard_headSet = sines_Z;
-% 
-% save('Tx_sines_after_soundCard_headSet.mat','Tx_sines_after_soundCard_headSet');
-% save('Tx_sines_before_soundCard_headSet.mat','Tx_sines_before_soundCard_headSet');
+Tx_sines_after_soundCard_headSet = DigilentData;
+Tx_sines_before_soundCard_headSet = sines_Z;
+
+save('Tx_sines_after_soundCard_headSet.mat','Tx_sines_after_soundCard_headSet');
+save('Tx_sines_before_soundCard_headSet.mat','Tx_sines_before_soundCard_headSet');
 
 % Tx_cosines_after_soundCard_headSet = DigilentData;
 % Tx_cosines_before_soundCard_headSet = cosines_Z;
 % 
 % save('Tx_cosines_after_soundCard_headSet.mat','Tx_cosines_after_soundCard_headSet');
 % save('Tx_cosines_before_soundCard_headSet.mat','Tx_cosines_before_soundCard_headSet');
-% 
+
 % 
 % save('timestamps.mat','timestamps')
 % clear sound
