@@ -107,13 +107,13 @@ for i = 1:1:Nf
     
 end
 
-plot_idx = 5;
+plot_idx = 3;
 scale = max(abs(Tx_sines_mat_headset(plot_idx,:)))/max(abs(Rx_sines_mat_headset(plot_idx,:)));
 % Time
 figure; 
 plot(Tx_sines_mat_headset(plot_idx,:)); hold on; plot(Rx_sines_mat_headset(plot_idx,:).*scale,'r');
 
-%return
+return
 
 % plot_idx = 70;
 % scale = max(abs(Tx_sines_mat_speaker(plot_idx,:)))/max(abs(Rx_sines_mat_speaker(plot_idx,:)));

@@ -55,17 +55,25 @@ cosines_Z = [zeros(1,5*Fs) , cosines];
 sound(sines_Z,Fs);
 [DigilentData, timestamps, triggerTime] = startForeground(s);
 %pause(d*2)
-Tx_sines_after_soundCard_headSet = DigilentData;
-Tx_sines_before_soundCard_headSet = sines_Z;
-
-save('Tx_sines_after_soundCard_headSet.mat','Tx_sines_after_soundCard_headSet');
-save('Tx_sines_before_soundCard_headSet.mat','Tx_sines_before_soundCard_headSet');
+% Tx_sines_after_soundCard_headSet = DigilentData;
+% Tx_sines_before_soundCard_headSet = sines_Z;
+% 
+% save('Tx_sines_after_soundCard_headSet.mat','Tx_sines_after_soundCard_headSet');
+% save('Tx_sines_before_soundCard_headSet.mat','Tx_sines_before_soundCard_headSet');
 
 % Tx_cosines_after_soundCard_headSet = DigilentData;
 % Tx_cosines_before_soundCard_headSet = cosines_Z;
 % 
 % save('Tx_cosines_after_soundCard_headSet.mat','Tx_cosines_after_soundCard_headSet');
 % save('Tx_cosines_before_soundCard_headSet.mat','Tx_cosines_before_soundCard_headSet');
+
+
+% Tx_cosines_after_soundCard_cable = DigilentData;
+% Tx_cosines_before_soundCard_cable = cosines_Z;
+% 
+% save('Tx_cosines_after_soundCard_cable.mat','Tx_cosines_after_soundCard_cable');
+% save('Tx_cosines_before_soundCard_cable.mat','Tx_cosines_before_soundCard_cable');
+
 
 % 
 % save('timestamps.mat','timestamps')
