@@ -28,7 +28,6 @@ ch = s.addAnalogInputChannel('AD1',1, 'Voltage');
 
 s.Rate = 44.1e3;  % set rate of object to desired rate
 s.Channels.Range = [-5 5];
-s.DurationInSeconds = Nf*d + 5;
 
 %% 
 
@@ -53,6 +52,7 @@ cosines_Z = [zeros(1,5*Fs) , cosines];
 
 
 sines_5runs = repmat(sines_Z,1,5);
+s.DurationInSeconds = 5*Nf*d + 5*5;
 %% Send
 sound(sines_5runs,Fs);
 [DigilentData, timestamps, triggerTime] = startForeground(s);
