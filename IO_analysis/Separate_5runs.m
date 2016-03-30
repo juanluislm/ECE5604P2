@@ -1,5 +1,5 @@
-clear
-close all
+% clear
+% close all
 
 %% Parameters
 % Sampling frequency

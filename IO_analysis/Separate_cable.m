@@ -16,16 +16,16 @@ nT = (0:d*Fs)/Fs;
 N_samples = length(nT); % Length of time domain vector
 %% Load data
 load Tx_sines_after_soundCard_cable
-Tx_sines_after_soundCard_cable = Tx_sines_after_soundCard_cable(1: end); % Eyeballing
-% load Rx_sines_cable; 
-% Rx_sines_cable = Rx_sines_cable(121465-dd*Fs:end); % Eyeballing
+Tx_sines_after_soundCard_cable = Tx_sines_after_soundCard_cable(184950-dd*Fs: end); % Eyeballing
+load Rx_sines_after_sampler; 
+Rx_sines_after_sampler = Rx_sines_after_sampler(105740-dd*Fs:end); % Eyeballing
 % %121380
 
-figure;
-plot(Tx_sines_after_soundCard_cable);
+% figure;
+% plot(Tx_sines_after_soundCard_cable); hold on;
+% plot(Rx_sines_after_sampler)
 
 
-return
 
 %% Separate sines
 
@@ -42,7 +42,7 @@ win_idx = 4000:12000; % Eyeballing
 for i = 1:1:Nf
     % Separate them
     idx = (i-1)*Fs*d + 1;
-    Rx_sines_mat(i,:) = Rx_sines_cable(idx:idx + Fs*d -1);
+    Rx_sines_mat(i,:) = Rx_sines_after_sampler(idx:idx + Fs*d -1);
     Tx_sines_mat(i,:) = Tx_sines_after_soundCard_cable(idx:idx + Fs*d -1);
     
     % Get them in freq
@@ -102,11 +102,11 @@ hold off;
 figure;
 plot(freq_arr,mag_response);
 title('Magnitude response');
-xlabel('Frequency [Hz]');
+xlabel('Frequency [kHz]');
 ylabel('Magnitude [dB]');
 
 figure;
-plot(freq_arr,phase_response);
+plot(freq_arr,unwrap(phase_response.*pi/180));
 title('Phase response');
 xlabel('Frequency [Hz]');
 ylabel('Phase [Degrees]');
