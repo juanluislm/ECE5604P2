@@ -159,7 +159,7 @@ plot(freq_arr/1000,mag_response2);hold on;
 plot(freq_arr/1000,mag_response3); hold on;
 plot(freq_arr/1000,mag_response4); hold on;
 plot(freq_arr/1000,mag_response5); 
-title('Magnitude response');
+title('Magnitude response of mic/speaker channel (measured 5 times)');
 xlabel('Frequency [kHz]');
 ylabel('Magnitude [dB]');
 legend('1','2','3','4','5');

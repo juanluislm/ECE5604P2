@@ -1,6 +1,7 @@
 clc;
 clear all;
 close all;
+load 6syms_test
 
 Nsym = 20000 ; % number of symbols; larger number may take time but give better resolution
 T = 1; %symbol time
@@ -13,12 +14,12 @@ shape = rcosdesign(beta,m,k,'sqrt'); % RRC filter
 
 NSPS = k ; % samples per symbol
 
-syms1 = sign(randn(1,Nsym)) + 1i*sign(randn(1,Nsym)) ; % Dirac deltas
-syms2 = sign(randn(1,Nsym)) + 1i*sign(randn(1,Nsym)) ; 
-syms3 = sign(randn(1,Nsym)) + 1i*sign(randn(1,Nsym)) ; 
-syms4 = sign(randn(1,Nsym)) + 1i*sign(randn(1,Nsym)) ; 
-syms5 = sign(randn(1,Nsym)) + 1i*sign(randn(1,Nsym)) ; 
-syms6 = sign(randn(1,Nsym)) + 1i*sign(randn(1,Nsym)) ; 
+% syms1 = sign(randn(1,Nsym)) + 1i*sign(randn(1,Nsym)) ; % Dirac deltas
+% syms2 = sign(randn(1,Nsym)) + 1i*sign(randn(1,Nsym)) ; 
+% syms3 = sign(randn(1,Nsym)) + 1i*sign(randn(1,Nsym)) ; 
+% syms4 = sign(randn(1,Nsym)) + 1i*sign(randn(1,Nsym)) ; 
+% syms5 = sign(randn(1,Nsym)) + 1i*sign(randn(1,Nsym)) ; 
+% syms6 = sign(randn(1,Nsym)) + 1i*sign(randn(1,Nsym)) ; 
 
 syms_up1 = upsample(syms1,NSPS) ; %upsampling
 syms_up2 = upsample(syms2,NSPS) ;

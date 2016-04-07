@@ -5,8 +5,8 @@ close all
 % Sampling frequency
 Fs = 44.1e3; 
 % Duration of each sinusoid
-dd = 0.05;
-d = 0.25 + dd; 
+dd = 0.05; % Duration of zeros between sinusoids
+d = 0.25 + dd; % Total duration of sinusoid + zeros
 % Array of frequencies
 df = 0.005;
 freq_arr = (df:df:0.5).*Fs; 
@@ -84,7 +84,7 @@ figure;
 for i = 1:1:Nf
    plot(w,db(Tx_F(i,:))); hold on; 
 end
-title('Send (Tx) sinusoids');
+title('Sent (Tx) sinusoids');
 xlabel('Frequency [Hz]');
 ylabel('Magnitude [dB]');
 hold off;
@@ -100,13 +100,13 @@ hold off;
 
 
 figure;
-plot(freq_arr,mag_response);
-title('Magnitude response');
+plot(freq_arr/1000,mag_response);
+title('Magnitude response of cable');
 xlabel('Frequency [kHz]');
 ylabel('Magnitude [dB]');
 
 figure;
 plot(freq_arr,unwrap(phase_response.*pi/180));
-title('Phase response');
+title('Phase response of cable');
 xlabel('Frequency [Hz]');
 ylabel('Phase [Degrees]');
