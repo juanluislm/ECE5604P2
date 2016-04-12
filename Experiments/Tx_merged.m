@@ -1,6 +1,6 @@
 clc;
 close all;
-load Ch_1
+load Tx_merged
 
 Nsym = 20000 ; % number of symbols; larger number may take time but give better resolution
 Nsym1 = 40000 ;

@@ -1,7 +1,7 @@
 clc;
 clear all;
 close all;
-load 6syms_test
+load Tx_nor_merged
 
 Nsym = 20000 ; % number of symbols; larger number may take time but give better resolution
 T = 1; %symbol time
