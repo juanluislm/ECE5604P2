@@ -21,9 +21,9 @@ ol=wl/2; %overlap
 b_ord = 2000;
 b = firpm(b_ord,[0 0.0317 0.0363 0.5]*2,[1 1 0 0 ], [10 1]);
 b_rxs_not_merged = filter(b,1,[rxs_not_merged zeros(1,10)]);
-newb_rxs= b_rxs_not_merged.*( -8.8079 + 4.6350i); % manually changed from "-6.0979e+02 + 4.6350e+02i" to achieve BER=0
+%newb_rxs= b_rxs_not_merged.*( -8.8079 + 4.6350i); % manually changed from "-6.0979e+02 + 4.6350e+02i" to achieve BER=0
 %freqz(b_rxs_not_merged,1,2^18,44.1e3)
-b_rxs = filter(shape,1,newb_rxs);
+%b_rxs = filter(shape,1,newb_rxs);
 % freqz(b_rxs,1,2^18,44.1e3)
 % 
 % id_x = 1000:20000;
@@ -32,6 +32,38 @@ b_rxs = filter(shape,1,newb_rxs);
 % plot(real(b_rxs(id_x)));
 % subplot(2,1,2);
 % plot(imag(b_rxs(id_x)));
+
+syms_up1 = upsample(syms1,28) ; 
+syms_up1 = [syms_up1 zeros(1,(2*28)+1000)]; 
+tx1 = filter(shape,1,syms_up1) ; 
+a=tx1(81:180);
+acon=fliplr(a);
+aconre=real(acon)-1i*imag(acon);
+con=filter(aconre,1,b_rxs_not_merged);
+conmax=find(con == max(con));
+aend=tx1((560056-99):(560056));
+aendcon=fliplr(aend);
+aendconre=real(aendcon)-1i*imag(aendcon);
+endcon=filter(aendconre,1,b_rxs_not_merged);
+endconmax=find(endcon == max(endcon));
+
+corr=(endcon(endconmax)-con(conmax));
+
+for kK=41271:60060
+        b_rxs_not_merged(kK) = b_rxs_not_merged(kK).*(exp(-2*pi*1i*((real(corr)-1i*imag(corr))*(kK-41271))))*(real(con(conmax))-1i*imag(con(conmax)));
+%((real(corr)-1i*imag(corr))*(kK-41272)+con(conmax))*(exp(-2*pi*1i*((real(corr)-1i*imag(corr))*(kK-41272))));
+end
+
+% for kK=1:length(b_rxs_not_merged)
+%     if kK>=1 && kK<41271
+%         b_rxs_not_merged(kK);
+%      else 
+%         b_rxs_not_merged(kK) = b_rxs_not_merged(kK).*con(conmax)*(exp(-2*pi*1i*((real(corr)-1i*imag(corr))*(kK-41271))));
+% %((real(corr)-1i*imag(corr))*(kK-41272)+con(conmax))*(exp(-2*pi*1i*((real(corr)-1i*imag(corr))*(kK-41272))));
+%     end
+% end
+
+b_rxs = filter(shape,1,b_rxs_not_merged);
 
 % Find Slicing point
 slice_ids = (41272+(8*28)+1):k:length(b_rxs);%(m*k+(b_ord/2)+1):k:length(b_rxs) ;%(2*m*k+1):NSPS:length(frx1)
