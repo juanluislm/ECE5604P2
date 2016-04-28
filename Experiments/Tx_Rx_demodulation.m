@@ -2,12 +2,13 @@ clc;
 close all;
 clear
 load LP_filter
-load Tx_not_merged_sent; 
+%load Tx_not_merged_sent; 
+load Tx_not_merged;
 load Rx_not_merged; rxs = Rx_not_merged; %rxs = Rx_not_merged(35863:length(txs)+35863-1); 
 load Rx_merged
 load 6syms_test; syms_concat = [syms1;syms2;syms3;syms4;syms5;syms6];
 shape_length = 225; delay_shape=(shape_length-1)/2;
-return
+
 
 actual_del = 35863+4410
 
@@ -37,16 +38,16 @@ beta = 0.515; %beta
 center_freq = 4500:3000:19500;
 % Demodulate
 % CHOOSE A CENTER FREQUENCY INDEX
-center_idx = 5;
+center_idx = 3;
 demod_fracfreq = center_freq(center_idx)/44100;
 
 f = pi;
 t = 5.612e5;
 delta = f/t;
 
-txs_not_merged = txs(1:length(txs)).*exp(-2*pi*1j*demod_fracfreq.*(0:length(txs)-1));
+txs_not_merged = txs(1:length(txs)).*exp(-2*pi*1j*(demod_fracfreq).*(0:length(txs)-1));
 %rxs_not_merged = rxs(1:t)'.*exp(-2*pi*1j*demod_fracfreq*(0:t-1) + 1j*(delta.*(0:t-1)));
-rxs_not_merged = rxs(1:length(rxs))'.*exp(-2*pi*1j*demod_fracfreq*(0:length(rxs)-1)).*5;
+rxs_not_merged = rxs(1:length(rxs))'.*exp(-2*pi*1j*(demod_fracfreq+0/44100)*(0:length(rxs)-1)).*5;
 
 
 % Lowpass filter (% Length of 2000, loaded from workspace)
@@ -64,9 +65,10 @@ N_corr = k*5;
 %C = xcorr(rxs,txs(1:N_corr));
 correlator = fliplr(conj(b_txs_not_merged(1:N_corr))); 
 C = filter(correlator,1,b_rxs_not_merged);
-phase0 = angle(conj(C(idx)));
 
 idx = find(abs(C) == max(abs(C)));
+%phase0 = angle(conj(C(idx)));
+
 
 delay_beg = idx-N_corr+1;
 
@@ -146,7 +148,7 @@ plot(w,unwrap(angle(Rx_demod)));
 legend('Tx','Rx')
 
 % In time
-delay_LP = (length(b)-1)/2;
+%delay_LP = (length(b)-1)/2;
 delay_match = (length(shape)-1);
 delay = delay_match;
 

@@ -1,7 +1,8 @@
 clc;
-clear all;
+clear
 close all;
-load Tx_nor_merged
+load Tx_not_merged
+load 6syms_test
 
 Nsym = 20000 ; % number of symbols; larger number may take time but give better resolution
 T = 1; %symbol time
@@ -28,12 +29,12 @@ syms_up4 = upsample(syms4,NSPS) ;
 syms_up5 = upsample(syms5,NSPS) ;
 syms_up6 = upsample(syms6,NSPS) ;
 
-syms_up1 = [syms_up1 zeros(1,(2*NSPS)+1000)]; %Add 0s
-syms_up2 = [syms_up2 zeros(1,(2*NSPS)+1000)];
-syms_up3 = [syms_up3 zeros(1,(2*NSPS)+1000)];
-syms_up4 = [syms_up4 zeros(1,(2*NSPS)+1000)];
-syms_up5 = [syms_up5 zeros(1,(2*NSPS)+1000)];
-syms_up6 = [syms_up6 zeros(1,(2*NSPS)+1000)];
+% syms_up1 = [syms_up1 zeros(1,(2*NSPS)+1000)]; %Add 0s
+% syms_up2 = [syms_up2 zeros(1,(2*NSPS)+1000)];
+% syms_up3 = [syms_up3 zeros(1,(2*NSPS)+1000)];
+% syms_up4 = [syms_up4 zeros(1,(2*NSPS)+1000)];
+% syms_up5 = [syms_up5 zeros(1,(2*NSPS)+1000)];
+% syms_up6 = [syms_up6 zeros(1,(2*NSPS)+1000)];
 
 tx1 = filter(shape,1,syms_up1) ; % tx after filter
 tx2 = filter(shape,1,syms_up2) ;
@@ -41,6 +42,10 @@ tx3 = filter(shape,1,syms_up3) ;
 tx4 = filter(shape,1,syms_up4) ;
 tx5 = filter(shape,1,syms_up5) ;
 tx6 = filter(shape,1,syms_up6) ;
+
+
+save('tx_MATLAB.mat','tx1','tx2','tx3','tx4','tx5','tx6');
+return
 
 nn1 = 1:length(tx1); %length of tx
 nn2 = 1:length(tx2);
@@ -73,6 +78,6 @@ tx6r = real(tx_fc6);
 txs=tx1r+tx2r+tx3r+tx4r+tx5r+tx6r; % sum of txs
 txs = [zeros(1,0.1*44.1e3), txs, zeros(1,0.1*44.1e3)];
 
-sound(txs,44.1e3)
+%sound(txs,44.1e3)
 
 
